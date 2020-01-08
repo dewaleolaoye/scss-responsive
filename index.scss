@@ -1,0 +1,61 @@
+//Handheld responsive breakpoints
+$break-small: 320px; // small
+$break-medium: 375px; // medium
+$break-handhelds: 425px; // large
+
+// Tablet responsive breakpoints
+$break-tablet: 768px;
+
+// Laptop responsive breakpoints
+$break-laptop: 1024px; // normal laptop screens
+$breal-laptop-l: 1440px; // large laptop screens
+
+@mixin respond-to($media) {
+  @if $media==small {
+    @media only screen and (max-width: $break-small) {
+      @content;
+    }
+  } @else if $media==medium {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-medium) {
+      @content;
+    }
+  } @else if $media==handhelds {
+    @media only screen and (min-width: $break-medium + 1) and (max-width: $break-handhelds) {
+      @content;
+    }
+  } @else if $media==tablet {
+    @media only screen and (min-width: $break-handhelds + 1) and (max-width: $break-tablet) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-from($media) {
+  @if $media==handhelds {
+    @media only screen and (max-width: $break-handhelds) {
+      @content;
+    }
+  } @else if $media==tablet {
+    @media only screen and (max-width: $break-tablet) {
+      @content;
+    }
+  } @else if $media==laptop {
+    @media only screen and (max-width: $break-laptop) {
+      @content;
+    }
+  }
+}
+
+@function toRem($num) {
+  @return #{$num/(16)}rem;
+  // @return #{$num/}
+}
+
+@mixin space($num) {
+  display: inline-block;
+  width: toRem($num);
+}
+
+@mixin radius($r: 6) {
+  border-radius: toRem($r);
+}
